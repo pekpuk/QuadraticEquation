@@ -1,4 +1,4 @@
-
+// Кабанова Анна 3630102/90003
 #include <iostream>
 #include <cmath>
 
