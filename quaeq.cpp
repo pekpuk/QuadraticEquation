@@ -42,27 +42,21 @@ void SolveQuadraticEquation(double a, double b, double c, double* root1, double*
 	}
 }
 
-void Run() {
-	int rootStatus = UNKNOWN;
-	double a = 0, b = 0, c = 0, root1 = 0, root2 = 0;
-
+void GetInput(double* a, double* b, double* c) {
 	std::cout << "Enter the coefficient A: ";
-	std::cin >> a;
-	std::cout << "A = " << a << std::endl;
+	std::cin >> *a;
+	std::cout << "A = " << *a << std::endl;
 
 	std::cout << "Enter the coefficient B: ";
-	std::cin >> b;
-	std::cout << "B = " << b << std::endl;
+	std::cin >> *b;
+	std::cout << "B = " << *b << std::endl;
 
 	std::cout << "Enter the coefficient C: ";
-	std::cin >> c;
-	std::cout << "C = " << c << std::endl;
+	std::cin >> *c;
+	std::cout << "C = " << *c << std::endl;
+}
 
-	if (a == 0)
-		SolveLinearEquation(b, c, &root1, &rootStatus);
-	else
-		SolveQuadraticEquation(a, b, c, &root1, &root2, &rootStatus);
-	
+void PrintOutput(int rootStatus, double root1, double root2) {
 	if (rootStatus == UNKNOWN)
 		std::cout << "Solving failed" << std::endl;
 	else if (rootStatus == NONE_ROOTS)
@@ -76,9 +70,19 @@ void Run() {
 		std::cout << "The second root is x2 = " << root2 << std::endl;
 	}
 }
-int main(void) {
 
-	Run();
+int main(void) {
+	int rootStatus = UNKNOWN;
+	double a = 0, b = 0, c = 0, root1 = 0, root2 = 0;
+	
+	GetInput(&a, &b, &c);
+
+	if (a == 0)
+		SolveLinearEquation(b, c, &root1, &rootStatus);
+	else
+		SolveQuadraticEquation(a, b, c, &root1, &root2, &rootStatus);
+	
+	PrintOutput(rootStatus, root1, root2);
 
 	return 0;
 }
